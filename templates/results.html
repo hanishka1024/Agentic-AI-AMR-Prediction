@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction Results</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='results_styles.css') }}?v={{ cache_buster }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <a href="{{ url_for('amr_form') }}" class="back-btn top-left-btn">
+        &#9664; Back to Prediction Form
+      </a>
+
+      {% set prediction_class = "" %} {% if prediction == "Resistant" %} {% set
+      prediction_class = "resistant" %} {% elif prediction == "Intermediate" %}
+      {% set prediction_class = "intermediate" %} {% elif prediction ==
+      "Susceptible" %} {% set prediction_class = "susceptible" %} {% endif %}
+
+      <div class="prediction-card {{ prediction_class }}">
+        <h2>🧪 Prediction Result</h2>
+        <p class="highlight">{{ prediction }}</p>
+      </div>
+      <div class="two-column-layout">
+        <div class="explanation-card">
+          <h2>📊 Clinical Interpretation</h2>
+          {% set sections = explanation.split('<br />') %} {% for line in
+          sections %} {% if line.startswith("📌") %}
+          <div class="section-card summary">{{ line|safe }}</div>
+          {% elif line.startswith("🧪") %}
+          <div class="section-card prediction">{{ line|safe }}</div>
+          {% elif line.startswith("⚠️") %}
+          <div class="section-card risks">
+            <h3>⚠️ Key Risk Factors</h3>
+            <ul>
+              {% for risk in sections if risk.startswith("•") %}
+              <li>{{ risk.replace("•", "") }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% elif line.startswith("💊") %}
+          <div class="section-card considerations">
+            <h3>💊 Clinical Considerations</h3>
+            <ul>
+              {% for point in sections if point.startswith("•") %}
+              <li>{{ point.replace("•", "") }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% elif line.startswith("✅") %}
+          <div class="section-card conclusion">{{ line|safe }}</div>
+          {% endif %} {% endfor %}
+        </div>
+        <div class="chat-interface">
+          <h2>💬 Expert Consultation</h2>
+          <div class="chat-box" id="chat-box">
+            <div class="message bot-message">
+              I am ready to address your queries regarding the prediction, AMR,
+              and clinical management.
+            </div>
+          </div>
+          <form id="chat-form" class="chat-input-form">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Type your query..."
+              required
+            />
+            <button type="submit" id="chat-submit-btn">Send</button>
+          </form>
+        </div>
+      </div>
+      <div class="qna-card">
+        <h2>💡 Predefined Q&A</h2>
+        <div class="accordion">
+          {% for question, answer in predefined_qna.items() %}
+          <button class="accordion-btn">{{ question }}</button>
+          <div class="accordion-panel">
+            <p>{{ answer }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <a
+        href="{{ url_for('home') }}"
+        class="back-btn home-link bottom-left-btn"
+      >
+        &#127968; Go to Home Page
+      </a>
+    </div>
+
+    <script>
+      // Accordion functionality
+      const accordions = document.querySelectorAll(".accordion-btn");
+      accordions.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.classList.toggle("active");
+          const panel = btn.nextElementSibling;
+          panel.style.maxHeight = panel.style.maxHeight
+            ? null
+            : panel.scrollHeight + "px";
+        });
+      });
+
+      // --- NEW CHAT JAVASCRIPT LOGIC (Requires /chat_api Flask route) ---
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const chatBox = document.getElementById("chat-box");
+      const chatSubmitBtn = document.getElementById("chat-submit-btn");
+
+      function appendMessage(sender, text) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        messageDiv.classList.add(
+          sender === "user" ? "user-message" : "bot-message"
+        );
+        messageDiv.innerHTML = text.replace(
+          /\*\*(.*?)\*\*/g,
+          "<strong>$1</strong>"
+        ); // Basic markdown bold
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+      }
+
+      chatForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const userQuery = chatInput.value.trim();
+
+        if (!userQuery) return;
+
+        // 1. Display user message
+        appendMessage("user", userQuery);
+        chatInput.value = "";
+        chatSubmitBtn.disabled = true;
+        chatInput.placeholder = "Thinking...";
+
+        // 2. Display loading message
+        const loadingMsg = document.createElement("div");
+        loadingMsg.classList.add("message", "bot-message");
+        loadingMsg.id = "loading-message";
+        loadingMsg.innerHTML =
+          '<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span>';
+        chatBox.appendChild(loadingMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+          const response = await fetch("/chat_api", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: userQuery }),
+          });
+
+          const data = await response.json();
+
+          // 3. Remove loading message and display bot response
+          loadingMsg.remove();
+          appendMessage("bot", data.response);
+        } catch (error) {
+          loadingMsg.remove();
+          console.error("Chat error:", error);
+          appendMessage("bot", "Sorry, I ran into an error. Please try again.");
+        } finally {
+          chatSubmitBtn.disabled = false;
+          chatInput.placeholder = "Type your query...";
+        }
+      });
+    </script>
+  </body>
+</html>

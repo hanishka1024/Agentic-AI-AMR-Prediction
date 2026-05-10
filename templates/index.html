@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMR Prediction Platform</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}?v={{ cache_buster }}"
+    />
+  </head>
+  <body>
+    <div class="welcome-container">
+      <div class="welcome-card">
+        <!-- The uploaded image placed centrally -->
+        <div class="image-wrapper">
+          <img
+            src="static/Antimicrobial.webp"
+            alt="Shield protecting against bacteria and virus with an antibiotic pill"
+          />
+        </div>
+
+        <h1 class="main-title">AMR Insight Platform</h1>
+        <p class="tagline">
+          Harnessing AI to predict Antimicrobial Resistance (AMR).
+        </p>
+        <p class="description">
+          Provide key patient and microbial features to generate clinical
+          predictions and comprehensive risk analyses.
+        </p>
+
+        <a href="{{ url_for('amr_form') }}" class="cta-button">
+          Start Prediction
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+**Overall Resistance Prevalence: 33.33%** (across all 2211 samples).
+
+--- CLINICAL AND ORGANISM PREVALENCE FROM TRAINING DATA ---
+
+**Resistance Rate by Hospitalization Status:**
+- ICU: 42.08%
+- Outpatient: 33.60%
+- Inpatient: 30.80%
+
+**Resistance Rate by Previous Antibiotic Use:**
+- No: 33.96%
+- Yes: 33.08%
+
+**Resistance Rate by Previous AMR History:**
+- Yes: 34.21%
+- No: 32.94%
+
+**Resistance Rate by Organism Group:**
+- Listeria innocua: 100.00%
+- Listeria monocytogenes: 100.00%
+- Klebsiella oxytoca: 100.00%
+- Enterobacter hormaechei: 100.00%
+- Enterobacter cloacae: 100.00%
+- Enterobacter bugandensis: 100.00%
+- Salmonella enterica: 70.37%
+- Enterobacter kobei: 66.67%
+- Klebsiella pneumoniae: 65.00%
+- E.coli and Shigella: 52.20%
+- Acinetobacter baumannii: 31.25%
+- Pseudomonas aeruginosa: 30.87%
+- Vibrio cholerae: 20.00%
+- Aeromonas salmonicida: 0.00%
+- Enterobacter asburiae: 0.00%
+- Elizabethkingia anophelis: 0.00%
+- Campylobacter jejuni: 0.00%
+- Enterococcus hirae: 0.00%
+- Enterobacter mori: 0.00%
+- Neisseria meningitidis: 0.00%
+- Neisseria perflava: 0.00%
+- Vibrio metoecus: 0.00%
+
+--- MOLECULAR AND GENOMIC CONTEXT FROM RESISTANT ISOLATES ---
+
+**Top 10 Most Frequent AMR Genotypes (in Resistant Isolates):**
+- fosA: Found in 84.5% of resistant samples (623 occurrences)
+- mexX: Found in 81.7% of resistant samples (602 occurrences)
+- mexA: Found in 81.4% of resistant samples (600 occurrences)
+- catB7: Found in 81.1% of resistant samples (598 occurrences)
+- aph(3')-IIb: Found in 80.7% of resistant samples (595 occurrences)
+- mexE: Found in 79.8% of resistant samples (588 occurrences)
+- gyrA_T83I: Found in 51.6% of resistant samples (380 occurrences)
+- crpP: Found in 33.2% of resistant samples (245 occurrences)
+- gyrA_D87N: Found in 25.9% of resistant samples (191 occurrences)
+- oprD_V359L: Found in 19.0% of resistant samples (140 occurrences)
+
+**Resistance Rate by Top SNP Clusters:**
+- Cluster PDS000011237.60: 100.00% of isolates in this cluster were Resistant.
+- Cluster PDS000046996.7: 100.00% of isolates in this cluster were Resistant.
+- Cluster PDS000030441.34: 100.00% of isolates in this cluster were Resistant.
+- Cluster PDS000019298.79: 100.00% of isolates in this cluster were Resistant.
+- Cluster PDS000055665.4: 100.00% of isolates in this cluster were Resistant.

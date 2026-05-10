@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMR Prediction Form</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}?v={{ cache_buster }}"
+    />
+  </head>
+  <body>
+    <a href="{{ url_for('home') }}" class="back-home-btn form-back-btn">
+      &larr; Back to Home
+    </a>
+
+    <div class="form-wrapper">
+      <div class="form-card">
+        <h1>🧬 AMR Prediction</h1>
+        <p class="subtitle">
+          Enter patient details to predict antimicrobial resistance
+        </p>
+
+        <form method="POST" action="{{ url_for('amr_form') }}">
+          <label for="age">Age:</label>
+          <input
+            type="number"
+            name="age"
+            id="age"
+            placeholder="Enter Age"
+            required
+          />
+
+          <label for="organism_group">Organism Group:</label>
+          <select name="organism_group" id="organism_group" required>
+            <option value="" disabled selected>Select Organism Group</option>
+            <option value="Listeria monocytogenes">
+              Listeria monocytogenes
+            </option>
+            <option value="Salmonella enterica">Salmonella enterica</option>
+            <option value="Campylobacter jejuni">Campylobacter jejuni</option>
+            <option value="E.coli and Shigella">E.coli and Shigella</option>
+            <option value="Acinetobacter baumannii">
+              Acinetobacter baumannii
+            </option>
+            <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+            <option value="Elizabethkingia anophelis">
+              Elizabethkingia anophelis
+            </option>
+            <option value="Enterobacter cloacae">Enterobacter cloacae</option>
+            <option value="Klebsiella oxytoca">Klebsiella oxytoca</option>
+            <option value="Pseudomonas aeruginosa">
+              Pseudomonas aeruginosa
+            </option>
+            <option value="Clostridioides difficile">
+              Clostridioides difficile
+            </option>
+            <option value="Vibrio cholerae">Vibrio cholerae</option>
+            <option value="Corynebacterium striatum">
+              Corynebacterium striatum
+            </option>
+            <option value="Photobacterium damselae">
+              Photobacterium damselae
+            </option>
+            <option value="Enterococcus faecium">Enterococcus faecium</option>
+            <option value="Aeromonas salmonicida">Aeromonas salmonicida</option>
+            <option value="Bacillus cereus group">Bacillus cereus group</option>
+            <option value="Listeria innocua">Listeria innocua</option>
+            <option value="Neisseria meningitidis">
+              Neisseria meningitidis
+            </option>
+            <option value="Vibrio metschnikovii">Vibrio metschnikovii</option>
+            <option value="Enterobacter hormaechei">
+              Enterobacter hormaechei
+            </option>
+            <option value="Enterobacter asburiae">Enterobacter asburiae</option>
+            <option value="Enterobacter kobei">Enterobacter kobei</option>
+            <option value="Enterobacter mori">Enterobacter mori</option>
+            <option value="Enterobacter bugandensis">
+              Enterobacter bugandensis
+            </option>
+            <option value="Enterococcus hirae">Enterococcus hirae</option>
+            <option value="Vibrio mimicus">Vibrio mimicus</option>
+            <option value="Vibrio metoecus">Vibrio metoecus</option>
+            <option value="Neisseria perflava">Neisseria perflava</option>
+          </select>
+
+          <label for="infection_type">Infection Type:</label>
+          <select name="infection_type" id="infection_type" required>
+            <option value="" disabled selected>Select Infection Type</option>
+            <option value="UTI">UTI (Urinary Tract Infection)</option>
+            <option value="SSTI">SSTI (Skin/Soft Tissue Infection)</option>
+            <option value="BSI">BSI (Bloodstream Infection)</option>
+            <option value="Pneumonia">Pneumonia</option>
+          </select>
+
+          <label for="sample_site">Sample Collection Site:</label>
+          <select name="sample_site" id="sample_site" required>
+            <option value="" disabled selected>
+              Select Sample Collection Site
+            </option>
+            <option value="Sputum">Sputum</option>
+            <option value="Blood">Blood</option>
+            <option value="Urine">Urine</option>
+            <option value="Wound">Wound</option>
+          </select>
+
+          <label for="hospitalization">Hospitalization Status:</label>
+          <select name="hospitalization" id="hospitalization" required>
+            <option value="" disabled selected>
+              Select Hospitalization Status
+            </option>
+            <option value="Inpatient">Inpatient</option>
+            <option value="Outpatient">Outpatient</option>
+            <option value="ICU">ICU</option>
+          </select>
+
+          <label for="previous_antibiotic">Previous Antibiotic Use:</label>
+          <select name="previous_antibiotic" id="previous_antibiotic" required>
+            <option value="" disabled selected>
+              Select Previous Antibiotic Use
+            </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <label for="duration">Treatment Duration (days):</label>
+          <input
+            type="number"
+            name="duration"
+            id="duration"
+            placeholder="Enter Duration in days"
+            required
+          />
+
+          <label for="previous_amr">Previous AMR History:</label>
+          <select name="previous_amr" id="previous_amr" required>
+            <option value="" disabled selected>
+              Select Previous AMR History
+            </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <label for="resistance_prev">Resistance to Previous Treatment:</label>
+          <select name="resistance_prev" id="resistance_prev" required>
+            <option value="" disabled selected>
+              Select Resistance to Previous Treatment
+            </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <button type="submit">🔍 Predict</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
