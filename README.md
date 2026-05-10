@@ -6,11 +6,11 @@
 
 ### 🌟 Highlights
 
-* 🤖 **Autonomous Multi-Agent Workflow:** Powered by **LangChain** to orchestrate four specialized agents for data, prediction, and narrative generation.
-* 🧠 **State-of-the-Art LLM:** Utilizes **LLaMA 3.1 (70B)** via Groq for high-fidelity clinical interpretations.
-* 📊 **Hybrid Ensemble Intelligence:** Combines **XGBoost, CatBoost, and LightGBM** for high-precision multi-class classification (Resistant, Intermediate, Susceptible).
-* 💊 **Clinical-First Design:** Bridges the gap between raw genomic data and actionable clinician insights through natural language.
-* 🚀 **Fast & Scalable:** Built with a modular architecture ready for real-time diagnostic environments.
+**Autonomous Multi-Agent Workflow:** Powered by **LangChain** to orchestrate four specialized agents for data, prediction, and narrative generation.
+**State-of-the-Art LLM:** Utilizes **LLaMA 3.1 (70B)** via Groq for high-fidelity clinical interpretations.
+**Hybrid Ensemble Intelligence:** Combines **XGBoost, CatBoost, and LightGBM** for high-precision multi-class classification (Resistant, Intermediate, Susceptible).
+**Clinical-First Design:** Bridges the gap between raw genomic data and actionable clinician insights through natural language.
+**Fast & Scalable:** Built with a modular architecture ready for real-time diagnostic environments.
 
 ---
 
@@ -20,7 +20,7 @@ Antimicrobial resistance (AMR) is a top-tier global public health threat. Tradit
 
 The system employs a "Chain-of-Thought" approach where an **Orchestrator Agent** coordinates specialized AI agents. This ensures that the final output is not just a statistical label, but a transparent and interpretable medical narrative.
 
-#### 🏗️ The Architecture
+####  The Architecture
 The framework is divided into four distinct agents:
 1.  **Agent 1 (The Engineer):** Handles data pre-processing and feature engineering of genomic signals.
 2.  **Agent 2 (The Predictor):** Executes the ensemble machine learning models for classification.
@@ -29,7 +29,7 @@ The framework is divided into four distinct agents:
 
 ---
 
-### 🚀 Usage
+###  Usage
 
 The project features a **Streamlit** dashboard that allows users to upload data and view agentic reasoning in real-time.
 
